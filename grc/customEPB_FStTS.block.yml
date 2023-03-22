@@ -1,0 +1,25 @@
+id: customEPB_FStTS
+label: 'File Source to Tagged Stream'
+flags: [ python ]
+category: '[customEPB]'
+
+templates:
+  imports: from gnuradio import customEPB
+  make: customEPB.FStTS(${FileName}, ${Pkt_len})
+
+parameters:
+-   id: FileName
+    label: FileName
+    dtype: string
+    default: "None"
+-   id: Pkt_len
+    label: Pkt_len
+    dtype: int
+    default: 252
+
+outputs:
+-   label: out
+    domain: stream
+    dtype: byte
+
+file_format: 1
