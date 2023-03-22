@@ -1,4 +1,4 @@
-# `gr-File_Source_to_Tagged_Stream`
+# gr-File_Source_to_Tagged_Stream
 
 Reads a binary file and produces a stream output with 'packet_len' tags for GNU Radio. Functionally it replaces a 'File Source' block and a 'Stream to Tagged Stream' block. The advantage of this block is that when the input file size is not an exact multiple of the selected packet length, the remainder at the end of the file is not lost in the 'Stream to Tagged Stream' buffer.
 
@@ -28,3 +28,7 @@ sudo apt install git
 ## Using the block in GRC
 
 After starting "gnuradio-companion", the "File Source to Tagged Stream" block will be listed in the Block Tree Panel under the "customEPB" group.
+
+## Example flowgraph
+
+An example flowgraph for sending packets is shown in the `examples` folder.
