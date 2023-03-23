@@ -1,3 +1,5 @@
 The example flowgraph str_pkt_21.grc shows how to use this block.
 
-The input file can be any text or binary file. The output file name should be changed to whatever the user wishes.
+The input file can be any text or binary file. For binary files, a packet_len of 256, 512, or 1024 seems to work best.
+
+The output file name should be changed to whatever the user wishes, but use the appropriate extension.

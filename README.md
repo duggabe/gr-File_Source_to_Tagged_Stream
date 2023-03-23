@@ -2,7 +2,7 @@
 
 Reads a binary file and produces a stream output with 'packet_len' tags for GNU Radio. Functionally it replaces a 'File Source' block and a 'Stream to Tagged Stream' block. The advantage of this block is that when the input file size is not an exact multiple of the selected packet length, the remainder at the end of the file is not lost in the 'Stream to Tagged Stream' buffer.
 
-** This is a work in progress with limited testing so far**  
+**This is a work in progress with limited testing so far**  
 Any feedback would be appreciated.
 
 ## Installation
