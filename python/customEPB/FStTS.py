@@ -21,35 +21,81 @@ class FStTS(gr.sync_block):
             out_sig=[np.uint8])
         self.FileName = FileName
         self.Pkt_len = Pkt_len
-        self._eof = False
+        self.state = 0
+        self.pre_count = 0
         self.indx = 0
         if (os.path.exists(self.FileName)):
             # open input file
             self.f_in = open (self.FileName, 'rb')
+            self._eof = False
         else:
             print(FileName, 'does not exist')
             self._eof = True
+            self.state = 3
+
+        self.char_list = [37,85,85,85,85,85,85,85,85,85,85,85,85,85,85,85, 85,85,85,85,85,85,85,85,85,85,85,85,85,85,85,85, 85,85,85,85,85,85,85,85,85,85,85,85,85,85,85,85, 85,85,85,93]
+        self.c_len = len (self.char_list)
+        # print (self.c_len)
 
     def work(self, input_items, output_items):
-        while (not (self._eof)):
-            buff = self.f_in.read (self.Pkt_len)
-            b_len = len(buff)
-            if b_len == 0:
-                print ('End of file')
-                self._eof = True
-                self.f_in.close()
-                break
-            key0 = pmt.intern("packet_len")
-            val0 = pmt.from_long(b_len)
+        if (self.state == 0):
+            # send phasing filler
+            key1 = pmt.intern("packet_len")
+            val1 = pmt.from_long(self.c_len)
             self.add_item_tag(0, # Write to output port 0
                 self.indx,   # Index of the tag
-                key0,   # Key of the tag
-                val0    # Value of the tag
+                key1,   # Key of the tag
+                val1    # Value of the tag
                 )
-            self.indx += b_len
+            self.indx += self.c_len
             i = 0
-            while (i < b_len):
-                output_items[0][i] = buff[i]
+            while (i < self.c_len):
+                output_items[0][i] = self.char_list[i]
                 i += 1
-            return (b_len)
+            self.pre_count += 1
+            if (self.pre_count > 19):
+                self.state = 1
+            return (self.c_len)
+        elif (self.state == 1):
+            while (not (self._eof)):
+                buff = self.f_in.read (self.Pkt_len)
+                b_len = len(buff)
+                if b_len == 0:
+                    print ('End of file')
+                    self._eof = True
+                    self.f_in.close()
+                    self.state = 2
+                    self.pre_count = 0
+                    break
+                key0 = pmt.intern("packet_len")
+                val0 = pmt.from_long(b_len)
+                self.add_item_tag(0, # Write to output port 0
+                    self.indx,   # Index of the tag
+                    key0,   # Key of the tag
+                    val0    # Value of the tag
+                    )
+                self.indx += b_len
+                i = 0
+                while (i < b_len):
+                    output_items[0][i] = buff[i]
+                    i += 1
+                return (b_len)
+        elif (self.state == 2):
+            # send idle filler
+            key1 = pmt.intern("packet_len")
+            val1 = pmt.from_long(self.c_len)
+            self.add_item_tag(0, # Write to output port 0
+                self.indx,   # Index of the tag
+                key1,   # Key of the tag
+                val1    # Value of the tag
+                )
+            self.indx += self.c_len
+            i = 0
+            while (i < self.c_len):
+                output_items[0][i] = self.char_list[i]
+                i += 1
+            self.pre_count += 1
+            if (self.pre_count > 4):
+                self.state = 3
+            return (self.c_len)
         return (0)

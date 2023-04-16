@@ -1,9 +1,9 @@
 # gr-File_Source_to_Tagged_Stream
 
-Reads a binary file and produces a stream output with 'packet_len' tags for GNU Radio. Functionally it replaces a 'File Source' block and a 'Stream to Tagged Stream' block. The advantage of this block is that when the input file size is not an exact multiple of the selected packet length, the remainder at the end of the file is not lost in the 'Stream to Tagged Stream' buffer.
-
-**This is a work in progress with limited testing so far**  
-Any feedback would be appreciated.
+Reads a binary file and produces a stream output with 'packet_len' tags for GNU Radio. Functionally it replaces a [File Source](https://wiki.gnuradio.org/index.php?title=File_Source) block, a [Stream to Tagged Stream](https://wiki.gnuradio.org/index.php?title=Stream_to_Tagged_Stream) block, and parts of a [Burst_Shaper](https://wiki.gnuradio.org/index.php?title=Burst_Shaper) block. The advantage of this block is that when the input file size is not an exact multiple of the selected packet length, the remainder at the end of the file is not lost in the 'Stream to Tagged Stream' buffer. This block performs the following functions:
+* Send a preamble to allow the receiver to synchronize.
+* Send the selected file with "packet_len" tags.
+* Send a post-file filler to assure that any buffers have been flushed.
 
 ## Installation
 

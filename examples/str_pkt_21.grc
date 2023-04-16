@@ -9,7 +9,7 @@ options:
     description: Baseband stream packets
     gen_cmake: 'On'
     gen_linking: dynamic
-    generate_options: no_gui
+    generate_options: qt_gui
     hier_block_src_path: '.:'
     id: str_pkt_21
     max_nouts: '0'
@@ -42,7 +42,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [304, 12.0]
+    coordinate: [384, 12.0]
     rotation: 0
     state: enabled
 - name: hdr_format
@@ -54,19 +54,31 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [496, 12.0]
+    coordinate: [568, 12.0]
+    rotation: 0
+    state: enabled
+- name: packet_len
+  id: variable
+  parameters:
+    comment: ''
+    value: '52'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [288, 12.0]
     rotation: 0
     state: enabled
 - name: samp_rate
   id: variable
   parameters:
     comment: ''
-    value: '32000'
+    value: '48000'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [200, 12.0]
+    coordinate: [192, 12.0]
     rotation: 0
     state: enabled
 - name: blocks_file_sink_0
@@ -76,7 +88,7 @@ blocks:
     alias: ''
     append: 'False'
     comment: ''
-    file: output.png
+    file: ./output.txt
     type: byte
     unbuffered: 'True'
     vlen: '1'
@@ -161,13 +173,15 @@ blocks:
     coordinate: [248, 336.0]
     rotation: 0
     state: true
-- name: blocks_throttle_0
-  id: blocks_throttle
+- name: blocks_throttle2_0
+  id: blocks_throttle2
   parameters:
     affinity: ''
     alias: ''
     comment: ''
     ignoretag: 'True'
+    limit: auto
+    maximum: '0.1'
     maxoutbuf: '0'
     minoutbuf: '0'
     samples_per_second: samp_rate
@@ -177,14 +191,45 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [304, 180.0]
+    coordinate: [296, 172.0]
+    rotation: 0
+    state: enabled
+- name: blocks_uchar_to_float_1_0
+  id: blocks_uchar_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [872, 640.0]
+    rotation: 0
+    state: enabled
+- name: blocks_unpack_k_bits_bb_0
+  id: blocks_unpack_k_bits_bb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    k: '8'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [712, 636.0]
     rotation: 0
     state: true
-- name: customEPB_FStTS_0
+- name: customEPB_FStTS_1
   id: customEPB_FStTS
   parameters:
-    FileName: ./DCS_logo.png
-    Pkt_len: '512'
+    FileName: '"./Gettysburg.txt"'
+    Pkt_len: packet_len
     affinity: ''
     alias: ''
     comment: ''
@@ -196,7 +241,7 @@ blocks:
     bus_structure: null
     coordinate: [40, 172.0]
     rotation: 0
-    state: true
+    state: enabled
 - name: digital_correlate_access_code_xx_ts_0
   id: digital_correlate_access_code_xx_ts
   parameters:
@@ -299,6 +344,103 @@ blocks:
     coordinate: [1032, 236.0]
     rotation: 0
     state: disabled
+- name: qtgui_time_sink_x_0
+  id: qtgui_time_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    axislabels: 'True'
+    color1: blue
+    color10: dark blue
+    color2: red
+    color3: green
+    color4: black
+    color5: cyan
+    color6: magenta
+    color7: yellow
+    color8: dark red
+    color9: dark green
+    comment: ''
+    ctrlpanel: 'False'
+    entags: 'True'
+    grid: 'False'
+    gui_hint: ''
+    label1: ''
+    label10: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    label5: ''
+    label6: ''
+    label7: ''
+    label8: ''
+    label9: ''
+    legend: 'True'
+    marker1: '-1'
+    marker10: '-1'
+    marker2: '-1'
+    marker3: '-1'
+    marker4: '-1'
+    marker5: '-1'
+    marker6: '-1'
+    marker7: '-1'
+    marker8: '-1'
+    marker9: '-1'
+    name: ''
+    nconnections: '1'
+    size: '128'
+    srate: samp_rate
+    stemplot: 'False'
+    style1: '1'
+    style10: '1'
+    style2: '1'
+    style3: '1'
+    style4: '1'
+    style5: '1'
+    style6: '1'
+    style7: '1'
+    style8: '1'
+    style9: '1'
+    tr_chan: '0'
+    tr_delay: 50e-6
+    tr_level: '0'
+    tr_mode: qtgui.TRIG_MODE_TAG
+    tr_slope: qtgui.TRIG_SLOPE_POS
+    tr_tag: '"packet_len"'
+    type: float
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    ylabel: Amplitude
+    ymax: '1.1'
+    ymin: '-0.1'
+    yunit: '""'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1040, 620.0]
+    rotation: 0
+    state: enabled
 - name: virtual_sink_0_0
   id: virtual_sink
   parameters:
@@ -369,12 +511,15 @@ connections:
 - [blocks_repack_bits_bb_1, '0', virtual_sink_1, '0']
 - [blocks_repack_bits_bb_1_0, '0', digital_crc32_bb_0_0, '0']
 - [blocks_tagged_stream_mux_0, '0', blocks_repack_bits_bb_1, '0']
-- [blocks_throttle_0, '0', digital_crc32_bb_0, '0']
-- [customEPB_FStTS_0, '0', blocks_throttle_0, '0']
+- [blocks_throttle2_0, '0', digital_crc32_bb_0, '0']
+- [blocks_uchar_to_float_1_0, '0', qtgui_time_sink_x_0, '0']
+- [blocks_unpack_k_bits_bb_0, '0', blocks_uchar_to_float_1_0, '0']
+- [customEPB_FStTS_1, '0', blocks_throttle2_0, '0']
 - [digital_correlate_access_code_xx_ts_0, '0', blocks_repack_bits_bb_1_0, '0']
 - [digital_crc32_bb_0, '0', digital_protocol_formatter_bb_0, '0']
 - [digital_crc32_bb_0, '0', virtual_sink_0_0, '0']
 - [digital_crc32_bb_0_0, '0', blocks_file_sink_0, '0']
+- [digital_crc32_bb_0_0, '0', blocks_unpack_k_bits_bb_0, '0']
 - [digital_protocol_formatter_bb_0, '0', header_bits, '0']
 - [digital_protocol_formatter_bb_0, '0', pdu_tagged_stream_to_pdu_0, '0']
 - [pdu_tagged_stream_to_pdu_0, pdus, blocks_message_debug_0, print]
@@ -384,4 +529,4 @@ connections:
 
 metadata:
   file_format: 1
-  grc_version: 3.10.5.1
+  grc_version: v3.11.0.0git-449-gf13e108d

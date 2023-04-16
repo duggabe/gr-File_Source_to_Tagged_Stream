@@ -1,5 +1,9 @@
 The example flowgraph str_pkt_21.grc shows how to use this block.
 
-The input file can be any text or binary file. For binary files, a packet_len of 256, 512, or 1024 seems to work best.
+The file source can be any text file of any length. A packet length of 52 has worked well in testing.
 
-The output file name should be changed to whatever the user wishes, but use the appropriate extension.
+After executing the flowgraph, the "output.txt" file will contain a partial preamble followed by several more, depending on how long it takes the receiver to synchronize; then the file itself; then the post-file filler.
+
+Because sending random binary data can cause errors in the data transmission, it has been found that converting the binary file to [Base64 encoding](https://en.wikipedia.org/wiki/Base64) first works reliably. A post-processing program can be used to strip the preambles and convert the Base64 code back to binary data.
+
+File "DCS_logo.b64" contains the Base64 encoding of the "DCS_logo.png" file.
