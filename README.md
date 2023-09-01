@@ -5,6 +5,18 @@ Reads a binary file and produces a stream output with 'packet_len' tags for GNU 
 * Send the selected file with "packet_len" tags.
 * Send a post-file filler to assure that any buffers have been flushed.
 
+## Development History
+
+During the development of the [Packet Communications](https://wiki.gnuradio.org/index.php?title=Packet_Communications) tutorial I decided to make an Out of Tree block to take the place of the File Source and the Stream to Tagged Stream blocks. This is that module.
+
+After that I worked on the [File transfer using Packet and AFSK](https://wiki.gnuradio.org/index.php?title=Simulation_example:_FSK#File_transfer_using_Packet_and_AFSK) tutorial and made several improvements to the Embedded Python Block.
+
+Next came follow-on work to the Packet Communications tutorial which resulted in the [File transfer using Packet and BPSK](https://wiki.gnuradio.org/index.php?title=File_transfer_using_Packet_and_BPSK) tutorial. It added several features such as Base64 encoding of the data, sending the originating filename in the postamble, and specifying the input file on the Python command line.
+
+## Recommendations
+
+This module works as is, but if you want the additional features of the Embedded Python Block from the BPSK tutorial, it can be copied from the [pkt_xmt.grc](https://raw.githubusercontent.com/duggabe/gr-control/main/Transmitters/pkt_xmt.grc) flowgraph and modified to suit your needs.
+
 ## Installation
 
 1. Open a terminal window.
