@@ -5,7 +5,7 @@ category: '[customEPB]'
 
 templates:
   imports: from gnuradio import customEPB
-  make: customEPB.FStTS(${FileName}, ${Pkt_len})
+  make: customEPB.FStTS(${FileName}, ${Pkt_len}, ${Preamble_len}, ${Postamble_len})
 
 parameters:
 -   id: FileName
@@ -15,7 +15,15 @@ parameters:
 -   id: Pkt_len
     label: Pkt_len
     dtype: int
-    default: 252
+    default: 384
+-   id: Preamble_len
+    label: Preamble_len
+    dtype: int
+    default: 64
+-   id: Postamble_len
+    label: Postamble_len
+    dtype: int
+    default: 16
 
 outputs:
 -   label: out
@@ -23,3 +31,4 @@ outputs:
     dtype: byte
 
 file_format: 1
+

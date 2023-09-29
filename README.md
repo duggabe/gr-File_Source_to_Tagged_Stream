@@ -13,10 +13,6 @@ After that I worked on the [File transfer using Packet and AFSK](https://wiki.gn
 
 Next came follow-on work to the Packet Communications tutorial which resulted in the [File transfer using Packet and BPSK](https://wiki.gnuradio.org/index.php?title=File_transfer_using_Packet_and_BPSK) tutorial. It added several features such as Base64 encoding of the data, sending the originating filename in the postamble, and specifying the input file on the Python command line.
 
-## Recommendations
-
-This module works as is, but if you want the additional features of the Embedded Python Block from the BPSK tutorial, it can be copied from the [pkt_xmt.grc](https://raw.githubusercontent.com/duggabe/gr-control/main/Transmitters/pkt_xmt.grc) flowgraph and modified to suit your needs.
-
 ## Installation
 
 1. Open a terminal window.
@@ -47,3 +43,4 @@ After starting "gnuradio-companion", the "File Source to Tagged Stream" block wi
 ## Example flowgraph
 
 An example flowgraph for sending packets is shown in the `examples` folder.
+
