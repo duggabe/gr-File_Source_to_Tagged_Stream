@@ -7,7 +7,7 @@ Reads a binary file and produces a stream output with 'packet_len' tags for GNU 
 
 ## Development History
 
-During the development of the [Packet Communications](https://wiki.gnuradio.org/index.php?title=Packet_Communications) tutorial I decided to make an Out of Tree block to take the place of the File Source and the Stream to Tagged Stream blocks. This is that module.
+During the development of the [Packet Communications](https://wiki.gnuradio.org/index.php?title=Packet_Communications) tutorial I decided to make an Out of Tree block to take the place of the File Source and the Stream to Tagged Stream blocks. That was the first version of this module.
 
 After that I worked on the [File transfer using Packet and AFSK](https://wiki.gnuradio.org/index.php?title=Simulation_example:_FSK#File_transfer_using_Packet_and_AFSK) tutorial and made several improvements to the Embedded Python Block.
 
